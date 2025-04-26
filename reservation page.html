@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reservations - Savory Seasons Restaurant</title>
+  <style>
+    /* Base styles and resets */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f7f5f0;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .header {
+      background-color: rgba(66, 39, 59, 0.95);
+      color: white;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #e6c095;
+    }
+
+    nav {
+      display: flex;
+      gap: 5px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(230, 192, 149, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .reservation-banner {
+      background-image: url('https://images.pexels.com/photos/5490985/pexels-photo-5490985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .reservation-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .reservation-form {
+      flex: 1;
+      min-width: 300px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #42273b;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      background-color: #e6c095;
+      color: #42273b;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: #d9b087;
+      transform: translateY(-3px);
+    }
+
+    #responseMessage {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .footer {
+      background: linear-gradient(to bottom, #42273b, #331d2e);
+      color: white;
+      padding: 40px 5% 20px;
+      text-align: center;
+    }
+
+    .copyright {
+      background-color: #331d2e;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <a href="welcome.php" class="logo">Savory <span>Seasons</span></a>
+    <nav> 
+      <a href="order.php" class="nav-link">Menu&Orders</a>
+      <a href="reservation.html" class="nav-link">Reservations</a>
+  
+      <!--<a href="payment.html" class="nav-link">Payment</a>-->
+      <a href="delivery.php" class="nav-link">Delivery / Take Away</a>
+
+    </nav>
+  </div>
+  
+  
+  <!-- Banner -->
+  <div class="reservation-banner">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <h1>Reserve Your Table</h1>
+      <p>Make your dining experience special by reserving your preferred table and time.</p>
+    </div>
+  </div>
+  
+  <!-- Reservation Form -->
+  <div class="reservation-container">
+    <div class="reservation-form">
+      <form id="reservationForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
+        </div>
+        <div class="form-group">
+          <label for="reservationTime">Select Time</label>
+          <input type="time" id="reservationTime" name="time" class="form-control" min="11:00" max="22:00" required>
+          <small>Our operating hours are 11:00 AM to 10:00 PM</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="reservationDate">Select Date</label>
+          <input type="date" id="reservationDate" name="date" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="guests">Number of Guests</label>
+          <input type="number" id="guests" name="guests" class="form-control" min="1" max="20" placeholder="Guests" required>
+        </div>
+        <button type="submit" class="btn">Reserve</button>
+        <div id="responseMessage"></div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer">
+    <p>Contact us at (555) 123-4567 or reservations@savoryseasons.com</p>
+  </div>
+  <div class="copyright">
+    &copy; 2025 Savory Seasons Restaurant. All Rights Reserved.
+  </div>
+  
+  <!-- Script -->
+  <script>
+    // Set minimum date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('reservationDate').setAttribute('min', today);
+
+    document.getElementById('reservationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      fetch('reservation page.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => {
+        const messageEl = document.getElementById('responseMessage');
+        messageEl.textContent = data.message;
+        messageEl.style.color = data.status === 'success' ? 'green' : 'red';
+
+        if (data.status === 'success') {
+          form.reset();
+        }
+      })
+      .catch(error => {
+        const msg = document.getElementById('responseMessage');
+        msg.textContent = "Something went wrong. Please try again.";
+        msg.style.color = 'red';
+        console.error('Error:', error);
+      });
+    });
+  </script>
+
+</body>
+</html>
